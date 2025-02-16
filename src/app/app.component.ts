@@ -1,17 +1,36 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {MatSidenavContainer} from "@angular/material/sidenav";
-import {MatToolbar} from "@angular/material/toolbar";
-import {MatNavList} from "@angular/material/list";
-import {MatIcon} from "@angular/material/icon";
+import {Router, RouterModule} from '@angular/router';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatSidenavContainer, MatToolbar, MatNavList, MatIcon],
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatListModule
+  ]
 })
 export class AppComponent {
-  title = 'agenda-app';
+  constructor(private router: Router) {}
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token'); // Verifica se o token está salvo
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']); // Redireciona para login ao sair
+  }
 }
