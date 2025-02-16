@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {CompromissoService} from "../../services/compromisso.service";
-import {Router} from "@angular/router";
-
-
+import { CompromissoService } from '../../services/compromisso.service';
+import { Router } from '@angular/router';
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {CommonModule, DatePipe} from "@angular/common";
 
 @Component({
   standalone: true,
   selector: 'app-listagem',
   templateUrl: './listagem.component.html',
   styleUrls: ['./listagem.component.scss'],
-  imports: [CommonModule],
-  providers: [CompromissoService]
+  imports: [CommonModule, DatePipe],
 })
 export class ListagemComponent implements OnInit {
-  displayedColumns: string[] = ['titulo', 'data', 'acoes']; // Define as colunas
   compromissos: any[] = [];
+  compromissoIdParaExcluir: number | null = null;
 
-  constructor(private compromissoService: CompromissoService, private router:Router) {}
+  constructor(
+    private compromissoService: CompromissoService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.carregarCompromissos();
@@ -29,15 +31,20 @@ export class ListagemComponent implements OnInit {
     });
   }
 
-  excluir(id: number): void {
-    if (confirm('Tem certeza que deseja excluir este compromisso?')) {
-      this.compromissoService.excluir(id).subscribe(() => {
+  editar(compromisso: any): void {
+    this.router.navigate(['compromissos/editar', compromisso.id]);
+  }
+
+  abrirModal(content: any, compromissoId: number): void {
+    this.compromissoIdParaExcluir = compromissoId;
+    this.modalService.open(content, { centered: true });
+  }
+
+  confirmarExclusao(): void {
+    if (this.compromissoIdParaExcluir !== null) {
+      this.compromissoService.excluir(this.compromissoIdParaExcluir).subscribe(() => {
         this.carregarCompromissos();
       });
     }
-  }
-
-  editar(compromisso: any): void {
-    this.router.navigate(['/compromissos/editar', compromisso.id]);
   }
 }
