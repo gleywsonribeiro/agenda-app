@@ -1,25 +1,21 @@
-table {
+.compromisso-table {
   width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #fff;
+  margin-top: 20px;
+  background: white;
+  border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-th {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
+.mat-header-cell {
   font-weight: bold;
+  text-transform: uppercase;
+  color: #444;
 }
 
-td {
+.mat-cell {
   color: #333;
 }
 
 button {
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
+  margin-right: 8px;
 }
