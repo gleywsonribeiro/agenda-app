@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
 import {FormsModule} from "@angular/forms";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import {FormsModule} from "@angular/forms";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   imports: [
-    FormsModule
+    FormsModule, CommonModule
   ]
 })
 export class LoginComponent {
