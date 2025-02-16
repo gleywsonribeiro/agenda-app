@@ -1,17 +1,14 @@
-<div class="register-container">
-  <h2>Cadastro</h2>
-  <form (submit)="register()">
-    <label>Nome:</label>
-    <input type="text" [(ngModel)]="nome" required />
+<form (submit)="register()">
+  <label>Nome:</label>
+  <input type="text" [(ngModel)]="nome" name="nome" required />
 
-    <label>Email:</label>
-    <input type="email" [(ngModel)]="email" required />
+  <label>Email:</label>
+  <input type="email" [(ngModel)]="email" name="email" required />
 
-    <label>Senha:</label>
-    <input type="password" [(ngModel)]="senha" required />
+  <label>Senha:</label>
+  <input type="password" [(ngModel)]="senha" name="senha" required />
 
-    <button type="submit">Cadastrar</button>
-  </form>
+  <button type="submit">Cadastrar</button>
+</form>
 
-  <p *ngIf="erro" class="erro">{{ erro }}</p>
-</div>
+<p *ngIf="erro" class="erro">{{ erro }}</p>

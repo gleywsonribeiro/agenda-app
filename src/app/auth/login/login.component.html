@@ -1,14 +1,11 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <form (submit)="login()">
-    <label>Email:</label>
-    <input type="email" [(ngModel)]="email" required/>
+<form (submit)="login()">
+  <label>Email:</label>
+  <input type="email" [(ngModel)]="email" name="email" required />
 
-    <label>Senha:</label>
-    <input type="password" [(ngModel)]="senha" required/>
+  <label>Senha:</label>
+  <input type="password" [(ngModel)]="senha" name="senha" required />
 
-    <button type="submit">Entrar</button>
-  </form>
+  <button type="submit">Entrar</button>
+</form>
 
-  <p *ngIf="erro" class="erro">{{ erro }}</p>
-</div>
+<p *ngIf="erro" class="erro">{{ erro }}</p>
