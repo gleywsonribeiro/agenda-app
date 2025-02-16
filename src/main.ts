@@ -4,6 +4,7 @@ import { importProvidersFrom } from '@angular/core';
 import {HttpClientModule, provideHttpClient, withInterceptors} from '@angular/common/http';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
+import 'zone.js';
 
 bootstrapApplication(AppComponent, {
   providers: [

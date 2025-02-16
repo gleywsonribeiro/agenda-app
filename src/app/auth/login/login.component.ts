@@ -1,30 +1,50 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {AuthService} from '../auth.service';
-import {FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-login',
   standalone: true,
+  selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   imports: [
-    FormsModule, CommonModule
-  ]
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+  ],
 })
 export class LoginComponent {
-  email = '';
-  senha = '';
-  erro = '';
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    senha: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
-  constructor(private authService: AuthService, private router: Router) {
-  }
+  erro: string | null = null;
 
-  login() {
-    this.authService.login(this.email, this.senha).subscribe({
-      next: () => this.router.navigate(['/compromissos']),
-      error: (err) => this.erro = 'Login falhou. Verifique suas credenciais.'
-    });
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+
+  login(): void {
+    if (this.loginForm.valid) {
+      const email: string = this.loginForm.value.email ?? ''; // Garante que não seja undefined
+      const senha: string = this.loginForm.value.senha ?? '';
+
+      this.authService.login(email, senha).subscribe({
+        next: (response) => {
+          this.router.navigate(['/compromissos']); // Redireciona após login
+        },
+        error: (err) => {
+          this.erro = 'Credenciais inválidas. Tente novamente!';
+        }
+      });
+    }
   }
 }
