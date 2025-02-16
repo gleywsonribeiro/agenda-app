@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {CompromissoService} from "../../services/compromisso.service";
 import {Router} from "@angular/router";
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
+
 
 
 @Component({
@@ -12,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-listagem',
   templateUrl: './listagem.component.html',
   styleUrls: ['./listagem.component.scss'],
-  imports: [CommonModule, MatButtonModule, MatTableModule, MatIconModule],
+  imports: [CommonModule],
   providers: [CompromissoService]
 })
 export class ListagemComponent implements OnInit {
