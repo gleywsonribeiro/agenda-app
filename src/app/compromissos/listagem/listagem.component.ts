@@ -47,4 +47,9 @@ export class ListagemComponent implements OnInit {
       });
     }
   }
+
+  /** Método público para navegação */
+  navegarParaCriar(): void {
+    this.router.navigate(['/compromissos/criar']);
+  }
 }
