@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CriarComponent } from './criar.component';
+import { CriarComponent } from './formulario-compromisso.component';
 
 describe('CriarComponent', () => {
   let component: CriarComponent;
@@ -11,7 +11,7 @@ describe('CriarComponent', () => {
       imports: [CriarComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CriarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

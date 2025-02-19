@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { CompromissoService } from '../../services/compromisso.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {CompromissoService} from '../../services/compromisso.service';
+import {Router} from '@angular/router';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CommonModule, DatePipe} from "@angular/common";
 
@@ -19,7 +19,8 @@ export class ListagemComponent implements OnInit {
     private compromissoService: CompromissoService,
     private router: Router,
     private modalService: NgbModal
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.carregarCompromissos();
@@ -31,13 +32,13 @@ export class ListagemComponent implements OnInit {
     });
   }
 
-  editar(compromisso: any): void {
-    this.router.navigate(['compromissos/editar', compromisso.id]);
+  editar(id: number): void {
+    this.router.navigate(['/compromissos/editar', id]);
   }
 
   abrirModal(content: any, compromissoId: number): void {
     this.compromissoIdParaExcluir = compromissoId;
-    this.modalService.open(content, { centered: true });
+    this.modalService.open(content, {centered: true});
   }
 
   confirmarExclusao(): void {
