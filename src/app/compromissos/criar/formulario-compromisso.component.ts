@@ -41,8 +41,13 @@ export class FormularioCompromissoComponent implements OnInit {
   }
 
   carregarCompromisso(id: number): void {
-    this.compromissoService.buscarPorId(id).subscribe(compromisso => {
-      this.compromissoForm.patchValue(compromisso);
+    this.compromissoService.buscarPorId(id).subscribe({
+      next: (compromisso) => {
+        this.compromissoForm.patchValue(compromisso);
+      },
+      error: (error) => {
+        console.error("Erro ao buscar compromisso:", error);
+      }
     });
   }
 
