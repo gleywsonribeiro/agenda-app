@@ -16,3 +16,15 @@ main {
 #sair {
   cursor: pointer;
 }
+
+nav.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.container {
+  margin-top: 80px; // Ajusta para não sobrepor o navbar
+}
