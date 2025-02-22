@@ -1,30 +1,76 @@
 <div class="container">
   <h2>{{ compromissoId ? 'Editar Compromisso' : 'Criar Compromisso' }}</h2>
 
+<!--  <form [formGroup]="compromissoForm" (ngSubmit)="salvarCompromisso()">-->
+<!--    <div class="form-group">-->
+<!--      <label for="titulo">Título</label>-->
+<!--      <input type="text" id="titulo" formControlName="titulo" class="form-control" required />-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <label for="descricao">Descrição</label>-->
+<!--      <textarea id="descricao" formControlName="descricao" class="form-control"></textarea>-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <label for="dataHoraInicio">Data/Hora Início</label>-->
+<!--      <input type="datetime-local" id="dataHoraInicio" formControlName="dataHoraInicio" class="form-control" required />-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--      <label for="dataHoraFim">Data/Hora Fim</label>-->
+<!--      <input type="datetime-local" id="dataHoraFim" formControlName="dataHoraFim" class="form-control" required />-->
+<!--    </div>-->
+
+<!--    <button type="submit" class="btn btn-primary">-->
+<!--      {{ compromissoId ? 'Atualizar' : 'Criar' }}-->
+<!--    </button>-->
+<!--    <button type="button" class="btn btn-secondary" (click)="navegarParaCompromissos()">Cancelar</button>-->
+<!--  </form>-->
   <form [formGroup]="compromissoForm" (ngSubmit)="salvarCompromisso()">
-    <div class="form-group">
-      <label for="titulo">Título</label>
-      <input type="text" id="titulo" formControlName="titulo" class="form-control" required />
+    <!-- Campo Título -->
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input type="text" id="titulo" class="form-control" formControlName="titulo">
+      <div class="invalid-feedback d-block" *ngIf="fcontrols['titulo'].touched && fcontrols['titulo'].invalid">
+        <small *ngIf="fcontrols['titulo'].errors?.required">O título é obrigatório.</small>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="descricao">Descrição</label>
-      <textarea id="descricao" formControlName="descricao" class="form-control"></textarea>
+    <!-- Campo Descrição -->
+    <div class="mb-3">
+      <label for="descricao" class="form-label">Descrição</label>
+      <textarea id="descricao" class="form-control" formControlName="descricao"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="fcontrols['descricao'].touched && fcontrols['descricao'].invalid">
+        <small *ngIf="fcontrols['descricao'].errors?.required">A descrição é obrigatória.</small>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="dataHoraInicio">Data/Hora Início</label>
-      <input type="datetime-local" id="dataHoraInicio" formControlName="dataHoraInicio" class="form-control" required />
+    <!-- Campo Data/Hora Início -->
+    <div class="mb-3">
+      <label for="dataHoraInicio" class="form-label">Data e Hora de Início</label>
+      <input type="datetime-local" id="dataHoraInicio" class="form-control" formControlName="dataHoraInicio">
+      <div class="invalid-feedback d-block" *ngIf="fcontrols['dataHoraInicio'].touched && fcontrols['dataHoraInicio'].invalid">
+        <small>Data e Hora de Início é obrigatória.</small>
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="dataHoraFim">Data/Hora Fim</label>
-      <input type="datetime-local" id="dataHoraFim" formControlName="dataHoraFim" class="form-control" required />
+    <!-- Campo Data/Hora Fim -->
+    <div class="mb-3">
+      <label for="dataHoraFim" class="form-label">Data e Hora de Fim</label>
+      <input type="datetime-local" id="dataHoraFim" class="form-control" formControlName="dataHoraFim">
+      <div class="invalid-feedback d-block" *ngIf="fcontrols['dataHoraFim'].touched && fcontrols['dataHoraFim'].invalid">
+        <small>Data e Hora de Fim é obrigatória.</small>
+      </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">
-      {{ compromissoId ? 'Atualizar' : 'Criar' }}
-    </button>
-    <button type="button" class="btn btn-secondary" (click)="navegarParaCompromissos()">Cancelar</button>
+    <!-- Botões -->
+<!--    <button type="submit" class="btn btn-primary" [disabled]="compromissoForm.invalid">Salvar</button>-->
+<!--    <button type="button" class="btn btn-secondary ms-2" (click)="router.navigate(['/compromissos'])">Cancelar</button>-->
+        <button type="submit" class="btn btn-primary">
+          {{ compromissoId ? 'Atualizar' : 'Criar' }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="navegarParaCompromissos()">Cancelar</button>
   </form>
+
 </div>

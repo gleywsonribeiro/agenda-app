@@ -10,20 +10,22 @@
       <thead class="table-dark">
       <tr>
         <th>Título</th>
-        <th>Data</th>
-        <th>Ações</th>
+        <th>Início</th>
+        <th>Fim</th>
+        <th class="text-center">Ações</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let compromisso of compromissos">
         <td>{{ compromisso.titulo }}</td>
-        <td>{{ compromisso.data | date:'dd/MM/yyyy HH:mm' }}</td>
-        <td>
+        <td>{{ compromisso.dataHoraInicio | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ compromisso.dataHoraFim | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td class="text-center">
           <button class="btn btn-primary btn-sm me-2" (click)="editar(compromisso.id)">
             <i class="bi bi-pencil"></i> Editar
           </button>
-          <button class="btn btn-danger" (click)="abrirModal(modalConfirmacao, compromisso.id)">
-            Excluir
+          <button class="btn btn-danger btn-sm me-2" (click)="abrirModal(modalConfirmacao, compromisso.id)">
+            <i class="bi bi-trash"></i> Excluir
           </button>
         </td>
       </tr>

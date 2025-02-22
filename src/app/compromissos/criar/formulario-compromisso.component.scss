@@ -19,3 +19,7 @@ h2 {
 button {
   margin-right: 1rem;
 }
+
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid {
+  border-color: #dc3545;
+}

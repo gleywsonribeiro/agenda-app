@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CompromissoService } from '../../services/compromisso.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CompromissoService} from '../../services/compromisso.service';
 import {CommonModule} from "@angular/common";
 
 @Component({
@@ -20,12 +20,13 @@ export class FormularioCompromissoComponent implements OnInit {
     private compromissoService: CompromissoService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.compromissoForm = this.fb.group({
       titulo: ['', Validators.required],
-      descricao: [''],
+      descricao: ['', Validators.required],
       dataHoraInicio: ['', Validators.required],
       dataHoraFim: ['', Validators.required]
     });
@@ -51,21 +52,29 @@ export class FormularioCompromissoComponent implements OnInit {
     });
   }
 
+  get fcontrols(): { [key: string]: any } {
+    return this.compromissoForm.controls;
+  }
+
+
   salvarCompromisso(): void {
-    if (this.compromissoForm.valid) {
-      if (this.compromissoId) {
-        // Atualiza o compromisso existente
-        this.compromissoService.atualizar(this.compromissoId, this.compromissoForm.value).subscribe(() => {
-          alert('Compromisso atualizado com sucesso!');
-          this.router.navigate(['/compromissos']);
-        });
-      } else {
-        // Cria um novo compromisso
-        this.compromissoService.criar(this.compromissoForm.value).subscribe(() => {
-          alert('Compromisso criado com sucesso!');
-          this.router.navigate(['/compromissos']);
-        });
-      }
+    if (this.compromissoForm.invalid) {
+      this.compromissoForm.markAllAsTouched(); // Marca os campos como "tocados" para exibir mensagens de erro
+      return;
+    }
+
+    if (this.compromissoId) {
+      // Atualiza o compromisso existente
+      this.compromissoService.atualizar(this.compromissoId, this.compromissoForm.value).subscribe(() => {
+        alert('Compromisso atualizado com sucesso!');
+        this.router.navigate(['/compromissos']);
+      });
+    } else {
+      // Cria um novo compromisso
+      this.compromissoService.criar(this.compromissoForm.value).subscribe(() => {
+        alert('Compromisso criado com sucesso!');
+        this.router.navigate(['/compromissos']);
+      });
     }
   }
 
