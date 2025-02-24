@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {ActivatedRoute, Router} from '@angular/router';
 import {CompromissoService} from '../../services/compromisso.service';
 import {CommonModule} from "@angular/common";
+import {Compromisso} from "../../models/compromisso.model";
 
 @Component({
   standalone: true,
@@ -43,7 +44,7 @@ export class FormularioCompromissoComponent implements OnInit {
 
   carregarCompromisso(id: number): void {
     this.compromissoService.buscarPorId(id).subscribe({
-      next: (compromisso) => {
+      next: (compromisso: Compromisso) => {
         this.compromissoForm.patchValue(compromisso);
       },
       error: (error) => {

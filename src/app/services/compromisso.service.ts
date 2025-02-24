@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Compromisso} from "../models/compromisso.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,23 +24,23 @@ export class CompromissoService {
     });
   }
 
-  listar(): Observable<any> {
-    return this.http.get(this.apiUrl, { headers: this.getAuthHeaders() });
+  listar(): Observable<Compromisso[]> {
+    return this.http.get<Compromisso[]>(this.apiUrl, { headers: this.getAuthHeaders() });
   }
 
-  buscarPorId(id: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+  buscarPorId(id: number): Observable<Compromisso> {
+    return this.http.get<Compromisso>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 
-  criar(compromisso: any): Observable<any> {
-    return this.http.post(this.apiUrl, compromisso, { headers: this.getAuthHeaders() });
+  criar(compromisso: Compromisso): Observable<Compromisso> {
+    return this.http.post<Compromisso>(this.apiUrl, compromisso, { headers: this.getAuthHeaders() });
   }
 
-  atualizar(id: number, compromisso: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, compromisso, { headers: this.getAuthHeaders() });
+  atualizar(id: number, compromisso: Compromisso): Observable<Compromisso> {
+    return this.http.put<Compromisso>(`${this.apiUrl}/${id}`, compromisso, { headers: this.getAuthHeaders() });
   }
 
-  excluir(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
+  excluir(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers: this.getAuthHeaders() });
   }
 }

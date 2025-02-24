@@ -3,6 +3,7 @@ import {CompromissoService} from '../../services/compromisso.service';
 import {Router} from '@angular/router';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {CommonModule, DatePipe} from "@angular/common";
+import {Compromisso} from "../../models/compromisso.model";
 
 @Component({
   standalone: true,
@@ -12,7 +13,7 @@ import {CommonModule, DatePipe} from "@angular/common";
   imports: [CommonModule, DatePipe],
 })
 export class ListagemComponent implements OnInit {
-  compromissos: any[] = [];
+  compromissos: Compromisso[] = [];
   compromissoIdParaExcluir: number | null = null;
 
   constructor(
