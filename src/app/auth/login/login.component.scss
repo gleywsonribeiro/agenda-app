@@ -68,3 +68,21 @@ button {
   font-size: 0.9rem;
   margin-top: 1rem;
 }
+
+.register-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+
+  a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #764ba2;
+    }
+  }
+}
+

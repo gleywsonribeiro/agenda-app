@@ -11,5 +11,10 @@
     </div>
     <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
     <p *ngIf="erro" class="erro">{{ erro }}</p>
+
+    <!-- Adicionando o link para registro -->
+    <p class="register-link">
+      Ainda não tem uma conta? <a routerLink="/auth/register">Cadastre-se aqui</a>
+    </p>
   </form>
 </div>

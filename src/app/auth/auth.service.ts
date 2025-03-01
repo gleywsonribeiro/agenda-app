@@ -19,7 +19,8 @@ export class AuthService {
   }
 
   register(nome: string, email: string, senha: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/register`, { nome, email, senha });
+    // Por enquanto passamos a role fixo, mas em um sistema real você deve ter um controle de roles
+    return this.http.post<any>(`${this.apiUrl}/register`, { nome, email, senha, role: 'USER' });
   }
 
   logout() {

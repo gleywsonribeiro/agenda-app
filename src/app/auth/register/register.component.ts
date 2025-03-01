@@ -1,31 +1,49 @@
 import { Component } from '@angular/core';
-import {AuthService} from "../auth.service";
-import {Router} from "@angular/router";
-import {FormsModule} from "@angular/forms";
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 import {CommonModule} from "@angular/common";
 
 @Component({
-  selector: 'app-register',
   standalone: true,
-  imports: [
-    FormsModule, CommonModule
-  ],
+  selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.scss'
+  styleUrls: ['./register.component.scss'],
+  imports: [CommonModule, ReactiveFormsModule]
 })
 export class RegisterComponent {
-  nome = '';
-  email = '';
-  senha = '';
-  erro = '';
+  registerForm: FormGroup;
+  erro: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    this.registerForm = this.fb.group({
+      nome: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      senha: ['', [Validators.required, Validators.minLength(6)]]
+    });
   }
 
-  register() {
-    this.authService.register(this.nome, this.email, this.senha).subscribe({
-      next: () => this.router.navigate(['/auth/login']),
-      error: () => this.erro = 'Falha no registro. Tente novamente.'
-    });
+  register(): void {
+    if (this.registerForm.valid) {
+      const { nome, email, senha } = this.registerForm.value;
+
+      this.authService.register(nome, email, senha).subscribe({
+        next: () => {
+          alert('Cadastro realizado com sucesso!');
+          this.router.navigate(['/login']);
+        },
+        error: err => {
+          this.erro = err.error.message || 'Erro ao registrar. Tente novamente.';
+        }
+      });
+    }
+  }
+
+  get f(): { [key: string]: any } {
+    return this.registerForm.controls;
   }
 }
