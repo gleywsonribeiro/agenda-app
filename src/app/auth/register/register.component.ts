@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from "@angular/common";
 
 @Component({
@@ -9,7 +9,7 @@ import {CommonModule} from "@angular/common";
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, RouterLink]
 })
 export class RegisterComponent {
   registerForm: FormGroup;

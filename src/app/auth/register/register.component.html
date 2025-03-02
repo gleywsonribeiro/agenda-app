@@ -1,36 +1,39 @@
 <div class="register-container">
   <h1>Crie sua Conta</h1>
   <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <!-- Nome -->
     <div class="form-group">
       <label for="nome">Nome</label>
-      <input type="text" id="nome" formControlName="nome" placeholder="Digite seu nome">
-      <small class="error" *ngIf="f['nome'].invalid && f['nome'].touched">
-        Nome é obrigatório.
-      </small>
+      <input type="text" id="nome" formControlName="nome" placeholder="Digite seu nome" />
+      <small class="error" *ngIf="f['nome'].invalid && f['nome'].touched">Nome é obrigatório</small>
     </div>
 
+    <!-- E-mail -->
     <div class="form-group">
       <label for="email">E-mail</label>
-      <input type="email" id="email" formControlName="email" placeholder="Digite seu e-mail">
+      <input type="email" id="email" formControlName="email" placeholder="Digite seu e-mail" />
       <small class="error" *ngIf="f['email'].invalid && f['email'].touched">
-        Insira um e-mail válido.
+        <span *ngIf="f['email'].errors?.['required']">E-mail é obrigatório</span>
+        <span *ngIf="f['email'].errors?.['email']">Formato de e-mail inválido</span>
       </small>
     </div>
 
+    <!-- Senha -->
     <div class="form-group">
       <label for="senha">Senha</label>
-      <input type="password" id="senha" formControlName="senha" placeholder="Crie uma senha">
+      <input type="password" id="senha" formControlName="senha" placeholder="Digite sua senha" />
       <small class="error" *ngIf="f['senha'].invalid && f['senha'].touched">
-      A senha deve ter pelo menos 6 caracteres.
+        <span *ngIf="f['senha'].errors?.['required']">Senha é obrigatória</span>
+        <span *ngIf="f['senha'].errors?.['minlength']">Mínimo de 6 caracteres</span>
       </small>
     </div>
 
-    <button type="submit" [disabled]="registerForm.invalid">Registrar</button>
+    <!-- Botão de cadastro -->
+    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Cadastrar</button>
 
-    <p *ngIf="erro" class="error-message">{{ erro }}</p>
-
+    <!-- Link para login -->
     <p class="login-link">
-      Já tem uma conta? <a routerLink="/auth/login">Faça login</a>
+      Já tem uma conta? <a routerLink="/login">Entre aqui</a>
     </p>
   </form>
 </div>
