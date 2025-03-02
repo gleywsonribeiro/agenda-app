@@ -23,6 +23,11 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/register`, { nome, email, senha, role: 'USER' });
   }
 
+  setAuthenticatedUser(token: string): void {
+    localStorage.setItem('token', token);
+  }
+
+
   logout() {
     localStorage.removeItem('token');
   }

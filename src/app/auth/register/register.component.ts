@@ -30,18 +30,20 @@ export class RegisterComponent {
   register(): void {
     if (this.registerForm.valid) {
       const { nome, email, senha } = this.registerForm.value;
-
       this.authService.register(nome, email, senha).subscribe({
-        next: () => {
-          alert('Cadastro realizado com sucesso!');
-          this.router.navigate(['/login']);
+        next: (response) => {
+          // Supondo que a API retorna um token no response
+          //localStorage.setItem('token', response.token);
+          this.authService.setAuthenticatedUser(response.token); // Atualiza estado da autenticação
+          this.router.navigate(['/compromissos']); // Redireciona para a tela principal
         },
-        error: err => {
-          this.erro = err.error.message || 'Erro ao registrar. Tente novamente.';
+        error: (error) => {
+          console.error('Erro ao registrar usuário', error);
         }
       });
     }
   }
+
 
   get f(): { [key: string]: any } {
     return this.registerForm.controls;
